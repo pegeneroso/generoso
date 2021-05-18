@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sunstar News</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+</head>
+<body>
+    <div class="body">
+        <div class="header">
+            <img src="./img/AC.png" height="90px" width="250px" alt="">
+            <img src="./img/AC.png" height="90px" width="250px" alt="">
+            <img src="./img/AC.png" height="90px" width="250px" alt="">
+            <img src="./img/AC.png" height="90px" width="250px" alt="">    
+        </div>
+        <div class="content">
+            
+        </div>
+    </div>
+    <script>
+        $(document).ready(function() {  
+            var url = 'https://rss.app/feeds/4lulrs14kwHbFF4p.xml';  
+            $.ajax({  
+                type: 'GET',  
+                url: "https://api.rss2json.com/v1/api.json?rss_url=" + url,  
+                dataType: 'jsonp',   
+                success: function(data) {  
+                    console.log(data.items[0]);
+                    var total=data.items.length-1;
+                    for(var i=0;i<=total;i++){
+                        var title=data.items[i].title;
+                        var content=data.items[i].description;
+                        $( ".content" ).append( "<div><div class='boxes'><h4>"+title+"</h4><p>"+content+"</p></div></div>" );
+                    }
+                    
+                }  
+            });  
+        }); 
+    </script>
+</body>
+</html>
